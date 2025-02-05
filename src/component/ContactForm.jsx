@@ -6,10 +6,35 @@ const LoginStatusBtn = (status) => {
   }
 };
 
+const SwitchLoginStatus = (status) => {
+  switch (status) {
+    case true:
+      return <button>Logout Btn using Switch</button>;
+    case false:
+      return <button>Login Btn using Switch</button>;
+    default:
+      return null;
+  }
+};
+
+const TernaryLoginStatus = (status) => {
+  let val;
+  status
+    ? (val = <button>Logout Button using Ternary</button>)
+    : (val = <button>Login Button using Ternary</button>);
+
+  return val;
+};
+
 const ContactForm = () => {
   let marks = 24;
   let city = ["Dhaka", "London", "Delhi", "Kolkata"];
   const status = true;
+
+  const submitForm = (event) => {
+    event.preventDefault();
+    alert("form submit btn clicked");
+  };
 
   return (
     <div>
@@ -34,7 +59,35 @@ const ContactForm = () => {
         })}
       </ol>
 
+      <h1>If conditional</h1>
       <div>{LoginStatusBtn(status)}</div>
+
+      <h1>Switch conditional</h1>
+      <div>{SwitchLoginStatus(status)}</div>
+
+      <h1>Ternary Condiiton</h1>
+      <div>{TernaryLoginStatus(status)}</div>
+
+      <h1>Logical Conditional Rendering</h1>
+      {status && (
+        <button>Logout Status using logical conditional rendering</button>
+      )}
+
+      <h1>Immediately Invoked Function</h1>
+      {(() => {
+        if (status) {
+          return <button>Logout Btn using Immediately Invoked</button>;
+        } else {
+          return <button>Login Btn using Immediately Invoked</button>;
+        }
+      })()}
+
+      <div>
+        <form onSubmit={submitForm}>
+          <input placeholder="name" />
+          <button type="submit">Send</button>
+        </form>
+      </div>
     </div>
   );
 };
