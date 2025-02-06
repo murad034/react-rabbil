@@ -1,8 +1,55 @@
+import { useState } from "react";
 import HeroImg from "./HeroImg";
 
 const Hero = (props) => {
+  const [list, setList] = useState([]);
+  const [item, setItem] = useState("");
+
+  const addToList = () => {
+    list.push(item);
+    setList([...list]);
+  };
+
+  const removeTodoItem = (index) => {
+    // alert(index);
+    // console.log(index);
+    list.splice(index, 1);
+    setList([...list]);
+  };
+
   return (
     <div>
+      <div>
+        <h1>Todo Application using usestate</h1>
+        <h1>{JSON.stringify(list)}</h1>
+        <div>
+          <table>
+            <tbody>
+              {list.length > 0 ? (
+                list.map((element, index) => {
+                  return (
+                    <tr>
+                      <td>{element}</td>
+                      <td>
+                        <button onClick={() => removeTodoItem(index)}>
+                          Remove
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })
+              ) : (
+                <tr></tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+
+        <p>{item}</p>
+        <input onChange={(e) => setItem(e.target.value)} placeholder="Item" />
+        <button onClick={addToList}>Add</button>
+      </div>
+
       <h1>React Props</h1>
       <p>product Information using props</p>
       <p>{props.item["name"]}</p>
