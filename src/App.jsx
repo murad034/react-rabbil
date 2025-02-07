@@ -1,8 +1,13 @@
 import React, { useRef, useState, useEffect } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./component/Header";
 import Hero from "./component/Hero";
 import ContactForm from "./component/ContactForm";
 import Footer from "./component/Footer";
+import HomePage from "./pages/HomePage";
+import ProductPage from "./pages/ProductPage";
+import ProfilePage from "./pages/ProfilePage";
+import NotFound from "./pages/NotFound";
 
 const App = () => {
   const item = {
@@ -84,6 +89,18 @@ const App = () => {
 
   return (
     <div>
+      <h1>React Dom Router</h1>
+
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />}></Route>
+          <Route path="/product" element={<ProductPage />}></Route>
+          <Route path="/profile" element={<ProfilePage />}></Route>
+          <Route path="*" element={<NotFound />}></Route>
+        </Routes>
+      </BrowserRouter>
+
+      <br />
       <h1>UseEffect Example</h1>
       <div>{JSON.stringify(pdata)}</div>
       <br />
