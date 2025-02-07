@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Header from "./component/Header";
 import Hero from "./component/Hero";
 import ContactForm from "./component/ContactForm";
@@ -60,8 +60,34 @@ const App = () => {
     }));
   };
 
+  // react hook useEffect
+
+  useEffect(() => {
+    console.log("Hello React");
+  }, [4, 233, 344, 45, 6, 4]);
+
+  const [pdata, setPdata] = useState([]);
+
+  // useEffect(() => {
+  //   fetch("https://dummyjson.com/products/1")
+  //     .then((res) => res.json())
+  //     .then((json) => setPdata(json));
+  // }, []);
+
+  useEffect(() => {
+    (async () => {
+      let res = await fetch("https://dummyjson.com/products/1");
+      let json = await res.json();
+      setPdata(json);
+    })();
+  }, []);
+
   return (
     <div>
+      <h1>UseEffect Example</h1>
+      <div>{JSON.stringify(pdata)}</div>
+      <br />
+
       <h1>UseState Example</h1>
       <button onClick={changeObjByState}>Change Btn</button>
       <h1>{myObj.key1}</h1>
