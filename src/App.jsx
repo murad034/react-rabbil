@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, HashRouter } from "react-router-dom";
 import Header from "./component/Header";
 import Hero from "./component/Hero";
 import ContactForm from "./component/ContactForm";
@@ -90,15 +90,31 @@ const App = () => {
   return (
     <div>
       <h1>React Dom Router</h1>
-
+      <p>Browser Router</p>
       <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />}></Route>
+          <Route
+            path="/product/:productID/:productName"
+            element={<ProductPage />}
+          ></Route>
+          <Route
+            path="/profile/:userID/:userName"
+            element={<ProfilePage />}
+          ></Route>
+          <Route path="*" element={<NotFound />}></Route>
+        </Routes>
+      </BrowserRouter>
+
+      <p>Hash Router</p>
+      <HashRouter>
         <Routes>
           <Route path="/" element={<HomePage />}></Route>
           <Route path="/product" element={<ProductPage />}></Route>
           <Route path="/profile" element={<ProfilePage />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
 
       <br />
       <h1>UseEffect Example</h1>
