@@ -8,6 +8,23 @@ import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
 import ProfilePage from "./pages/ProfilePage";
 import NotFound from "./pages/NotFound";
+// import TableList from "./component/TableList";
+
+import {
+  HStack,
+  Heading,
+  Stack,
+  Button,
+  Box,
+  Text,
+  Table,
+} from "@chakra-ui/react";
+import {
+  PaginationItems,
+  PaginationNextTrigger,
+  PaginationPrevTrigger,
+  PaginationRoot,
+} from "@/components/ui/pagination";
 
 const App = () => {
   const item = {
@@ -87,8 +104,63 @@ const App = () => {
     })();
   }, []);
 
+  // ui chakra
+
+  const items = [
+    { id: 1, name: "Laptop", category: "Electronics", price: 999.99 },
+    { id: 2, name: "Coffee Maker", category: "Home Appliances", price: 49.99 },
+    { id: 3, name: "Desk Chair", category: "Furniture", price: 150.0 },
+    { id: 4, name: "Smartphone", category: "Electronics", price: 799.99 },
+    { id: 5, name: "Headphones", category: "Accessories", price: 199.99 },
+  ];
+
   return (
     <div>
+      <h1>Chakra UI Connected</h1>
+      <HStack>
+        <Button>Click me</Button>
+      </HStack>
+
+      <Box p={4}>
+        <Text fontSize="2xl">Hello Chakra UI</Text>
+        <Button colorScheme="green" mt={2}>
+          Click Me
+        </Button>
+      </Box>
+
+      <h1>Chakra TableList</h1>
+
+      <Stack width="full" gap="5">
+        <Heading size="xl">Products</Heading>
+        <Table.Root size="sm" variant="outline" striped>
+          <Table.Header>
+            <Table.Row>
+              <Table.ColumnHeader>Product</Table.ColumnHeader>
+              <Table.ColumnHeader>Category</Table.ColumnHeader>
+              <Table.ColumnHeader textAlign="end">Price</Table.ColumnHeader>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {items.map((item) => (
+              <Table.Row key={item.id}>
+                <Table.Cell>{item.name}</Table.Cell>
+                <Table.Cell>{item.category}</Table.Cell>
+                <Table.Cell textAlign="end">{item.price}</Table.Cell>
+              </Table.Row>
+            ))}
+          </Table.Body>
+        </Table.Root>
+
+        <PaginationRoot count={items.length * 5} pageSize={5} page={1}>
+          <HStack wrap="wrap">
+            <PaginationPrevTrigger />
+            <PaginationItems />
+            <PaginationNextTrigger />
+          </HStack>
+        </PaginationRoot>
+      </Stack>
+
+      <br />
       <h1>React Dom Router</h1>
       <p>Browser Router</p>
       <BrowserRouter>
